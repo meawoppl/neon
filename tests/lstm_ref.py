@@ -8,9 +8,13 @@ The adaptation includes
 """
 import numpy as np
 
+import sys
+if sys.version > (3, 0):
+    xrange = range
+    raw_input = input
+
 
 class LSTM:
-
     @staticmethod
     def init(input_size, hidden_size):
         """
@@ -249,11 +253,11 @@ def checkSequentialMatchesBatch():
             dh0 = dhprev
 
     # and make sure the gradients match
-    print 'Making sure batched version agrees with sequential version: (should all be True)'
-    print np.allclose(BdX, dX)
-    print np.allclose(BdWLSTM, dWLSTM)
-    print np.allclose(Bdc0, dc0)
-    print np.allclose(Bdh0, dh0)
+    print('Making sure batched version agrees with sequential version: (should all be True)')
+    print(np.allclose(BdX, dX))
+    print(np.allclose(BdWLSTM, dWLSTM))
+    print(np.allclose(Bdc0, dc0))
+    print(np.allclose(Bdh0, dh0))
 
 
 def checkBatchGradient():
@@ -326,4 +330,4 @@ if __name__ == "__main__":
     checkSequentialMatchesBatch()
     raw_input('check OK, press key to continue to gradient check')
     checkBatchGradient()
-    print 'every line should start with OK. Have a nice day!'
+    print('every line should start with OK. Have a nice day!')

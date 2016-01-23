@@ -47,15 +47,15 @@ def allclose_with_out(x, y, atol=0.0, rtol=1.0e-5):
     ac = np.allclose(x, y, rtol=rtol, atol=atol)
     if not ac:
         dd = np.abs(x-y)
-        print 'abs errors: %e [%e, %e] Abs Thresh = %e' \
-              % (np.median(dd), np.min(dd), np.max(dd), atol)
+        print('abs errors: %e [%e, %e] Abs Thresh = %e'
+              % (np.median(dd), np.min(dd), np.max(dd), atol))
         amax = np.argmax(dd)
-        print 'worst case: %e %e' % (x.flat[amax], y.flat[amax])
+        print('worst case: %e %e' % (x.flat[amax], y.flat[amax]))
         dd = np.abs(np.divide(dd, y))
-        print 'rel errors: %e [%e, %e] Rel Thresh = %e' \
-              % (np.median(dd), np.min(dd), np.max(dd), rtol)
+        print('rel errors: %e [%e, %e] Rel Thresh = %e'
+              % (np.median(dd), np.min(dd), np.max(dd), rtol))
         amax = np.argmax(dd)
-        print 'worst case: %e %e' % (x.flat[amax], y.flat[amax])
+        print('worst case: %e %e' % (x.flat[amax], y.flat[amax]))
     return ac
 
 

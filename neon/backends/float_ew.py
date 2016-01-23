@@ -113,13 +113,13 @@ def _print_tree(node, level=0):
     """
 
     if type(node) is list:
-        print ("    " * level) + ", ".join(str(s) for s in node[0:3])
+        print(("    " * level) + ", ".join(str(s) for s in node[0:3]))
         if len(node) > 3:
             _print_tree(node[3], level + 1)
         if len(node) > 4:
             _print_tree(node[4], level + 1)
     else:
-        print ("    " * level) + str(node)
+        print(("    " * level) + str(node))
 
 
 def _post_order(node, stack=None):
@@ -285,9 +285,9 @@ def _get_compound_kernel(type_args):
     stages.append((last_stage, _post_order(tree)))
 
     # for stage, stage_data in enumerate(stages):
-    #     print stage_data[0], stage
-    #     for s in stage_data[1]: print s
-    #     print
+    #     print(stage_data[0], stage)
+    #     for s in stage_data[1]: print(s)
+    #     print()
     # exit()
 
     stack = list()

@@ -74,8 +74,8 @@ class ImageCaption(NervanaObject):
         self.dev_y_lblflat = self.dev_y_lbl.reshape((1, self.dev_y_lbl.size))
 
         self.shape = [self.image_size, (self.vocab_size, self.max_sentence_length)]
-        print "Vocab size: %d, Max sentence length: %d" % (self.vocab_size,
-                                                           self.max_sentence_length)
+        print("Vocab size: %d, Max sentence length: %d" % (self.vocab_size,
+                                                           self.max_sentence_length))
 
     def read_images(self, split):
         """
@@ -99,7 +99,7 @@ class ImageCaption(NervanaObject):
         """
 
         self.path = path
-        print 'Reading train images and sentences from %s' % self.path
+        print('Reading train images and sentences from %s' % self.path)
         self.read_images('train')
         self.load_vocab()
 
@@ -245,7 +245,7 @@ class ImageCaption(NervanaObject):
         bleu_script_url = 'https://raw.githubusercontent.com/karpathy/neuraltalk/master/eval/'
         bleu_script = 'multi-bleu.perl'
 
-        print "Writing output and reference sents to dir %s" % self.path
+        print("Writing output and reference sents to dir %s" % self.path)
 
         output_f = open(output_file, 'w+')
         for sent in sents:
@@ -265,7 +265,7 @@ class ImageCaption(NervanaObject):
         if not os.path.exists(bleu_script):
             fetch_dataset(bleu_script_url, bleu_script, bleu_script, 6e6)
         bleu_command = 'perl multi-bleu.perl reference < output'
-        print "Executing bleu eval script: ", bleu_command
+        print("Executing bleu eval script: ", bleu_command)
         os.system(bleu_command)
         os.chdir(owd)
 
@@ -304,7 +304,7 @@ class ImageCaptionTest(ImageCaption):
 
     def __init__(self, path):
         self.path = path
-        print 'Reading test images and sentences from %s' % self.path
+        print('Reading test images and sentences from %s' % self.path)
         # Load vocab using training set and then load test set
         self.read_images('train')
         self.load_vocab()

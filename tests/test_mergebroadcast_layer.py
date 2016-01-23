@@ -105,7 +105,7 @@ def test_branch_model():
     inp = neon_layer.be.array(inpa)
 
     neon_layer.allocate()
-    print neon_layer.nested_str()
+    print(neon_layer.nested_str())
     neon_layer.layers[0].prev_layer = True
     neon_layer.allocate_deltas()
     neon_layer.layers[0].set_deltas([be.iobuf(inshape)])
@@ -160,9 +160,9 @@ def test_branch_model():
     neon_out_ref = x.get()
     difference = neon_out_ref - neon_out
     assert np.max(np.abs(difference)) < 1e-7
-    print np.max(np.abs(difference))
+    print(np.max(np.abs(difference)))
 
-    print "Beginning Back prop"
+    print("Beginning Back prop")
     erra = np.random.random(neon_out.shape)
     err = be.array(erra)
     for ll in reversed(neon_layer.layers[8:]):
@@ -180,7 +180,7 @@ def test_branch_model():
     neon_ref_deltas = ref_deltas.get()
 
     difference = neon_deltas - neon_ref_deltas
-    print np.max(np.abs(difference))
+    print(np.max(np.abs(difference)))
     assert np.max(np.abs(difference)) < 1e-8
 
 
@@ -206,7 +206,7 @@ def test_branch_model_fork():
     inp = neon_layer.be.array(inpa)
 
     neon_layer.allocate()
-    print neon_layer.nested_str()
+    print(neon_layer.nested_str())
     neon_layer.layers[0].layers[0].prev_layer = True
     neon_layer.allocate_deltas()
     neon_layer.layers[0].layers[0].set_deltas([be.iobuf(inshape)])
@@ -271,15 +271,15 @@ def test_branch_model_fork():
     neon_out_ref = x.get()
     difference = neon_out_ref - neon_out[0]
     assert np.max(np.abs(difference)) < 1e-7
-    print np.max(np.abs(difference))
+    print(np.max(np.abs(difference)))
 
     # Now do second branch
     neon_out_ref2 = branch2.fprop(main2_out).get()
     difference = neon_out_ref2 - neon_out[1]
     assert np.max(np.abs(difference)) < 1e-7
-    print np.max(np.abs(difference))
+    print(np.max(np.abs(difference)))
 
-    print "Beginning Back prop"
+    print("Beginning Back prop")
     erra = [np.random.random(d.shape) for d in neon_out]
     err = [be.array(d) for d in erra]
     neon_layer.layers[0].layers[0].deltas = be.iobuf(inshape)
@@ -307,7 +307,7 @@ def test_branch_model_fork():
     neon_ref_deltas = ref_deltas.get()
     difference = middle_neon_deltas - neon_ref_deltas
 
-    print np.max(np.abs(difference))
+    print(np.max(np.abs(difference)))
     assert np.max(np.abs(difference)) < 1e-8
 
     x = ref_deltas
@@ -318,7 +318,7 @@ def test_branch_model_fork():
 
     bottom_neon_ref_deltas = main2[1].deltas.get()
     difference = bottom_neon_deltas - bottom_neon_ref_deltas
-    print np.max(np.abs(difference))
+    print(np.max(np.abs(difference)))
     assert np.max(np.abs(difference)) < 1e-8
 
 

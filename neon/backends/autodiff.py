@@ -311,7 +311,7 @@ def memoize_autodiff(func):
         key = (op_tree.key(), be, next_error)
         if key not in cache:
             cache[key] = func(op_tree, be, next_error)
-            # print 'created grad_tree cache'
+            # print('created grad_tree cache')
         return cache[key]
     return memoizer
 

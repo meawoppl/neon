@@ -91,4 +91,4 @@ prediction = ypred.argmax(2).reshape((valid_set.nbatches,
                                       args.batch_size,
                                       time_steps)).transpose(1, 0, 2)
 fraction_correct = (prediction == valid_set.y).mean()
-print 'Misclassification error = %.1f%%' % ((1-fraction_correct)*100)
+print('Misclassification error = %.1f%%' % ((1 - fraction_correct) * 100))

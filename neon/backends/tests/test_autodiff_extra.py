@@ -231,7 +231,7 @@ class TestAutodiff:
         for autodiff_grad, numerical_grad in zip(autodiff_grads_and_val[0],
                                                  numerical_grads_and_val[0]):
             count += 1
-            # print count
+            # print(count)
             np.testing.assert_allclose(autodiff_grad.astype(self.dtype),
                                        numerical_grad.astype(self.dtype),
                                        rtol=rtol, atol=atol,

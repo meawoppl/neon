@@ -137,25 +137,25 @@ def check_lstm(seq_len, input_size, hidden_size,
     Ct_ref = batch_cache['Ct'].reshape(seq_len * batch_size, hidden_size).T
 
     # compare results
-    print '====Verifying IFOG===='
+    print('====Verifying IFOG====')
     allclose_with_out(lstm.ifog_buffer.get(),
                       IFOGf_ref,
                       rtol=0.0,
                       atol=1.0e-5)
 
-    print '====Verifying cell states===='
+    print('====Verifying cell states====')
     allclose_with_out(lstm.c_act_buffer.get(),
                       Ct_ref,
                       rtol=0.0,
                       atol=1.0e-5)
 
-    print '====Verifying hidden states===='
+    print('====Verifying hidden states====')
     allclose_with_out(lstm.outputs.get(),
                       Hout_ref,
                       rtol=0.0,
                       atol=1.0e-5)
 
-    print 'fprop is verified'
+    print('fprop is verified')
 
     # now test the bprop
     # generate random deltas tensor
@@ -176,33 +176,33 @@ def check_lstm(seq_len, input_size, hidden_size,
     dX_ref = dX_ref.reshape(seq_len * batch_size, input_size).T
 
     # compare results
-    print 'Making sure neon LSTM match numpy LSTM in bprop'
-    print '====Verifying update on W_recur===='
+    print('Making sure neon LSTM match numpy LSTM in bprop')
+    print('====Verifying update on W_recur====')
 
     assert allclose_with_out(dWrecur_neon,
                              dWrecur_ref.T,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print '====Verifying update on W_input===='
+    print('====Verifying update on W_input====')
     assert allclose_with_out(dWinput_neon,
                              dWinput_ref.T,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print '====Verifying update on bias===='
+    print('====Verifying update on bias====')
     assert allclose_with_out(db_neon.flatten(),
                              db_ref,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print '====Verifying output delta===='
+    print('====Verifying output delta====')
     assert allclose_with_out(lstm.out_deltas_buffer.get(),
                              dX_ref,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print 'bprop is verified'
+    print('bprop is verified')
 
     return
 
@@ -307,7 +307,7 @@ def gradient_check(seq_len, input_size, hidden_size, batch_size,
     # This is necessary for 32 bit computations
 
     min_max_err = -1.0  # minimum max error
-    print 'Perturb mag, max grad diff'
+    print('Perturb mag, max grad diff')
     for pert_exp in range(-5, 0):
         # need to generate the scaling and input outside
         # having an issue with the random number generator
@@ -328,7 +328,7 @@ def gradient_check(seq_len, input_size, hidden_size, batch_size,
                                            rand_scale=rand_scale,
                                            inp_bl=inp)
         dd = np.max(np.abs(grad_est-deltas))
-        print '%e, %e' % (pert_mag, dd)
+        print('%e, %e' % (pert_mag, dd))
         if min_max_err < 0.0 or dd < min_max_err:
             min_max_err = dd
         # reset the seed so models are same in each run
@@ -336,8 +336,8 @@ def gradient_check(seq_len, input_size, hidden_size, batch_size,
         NervanaObject.be.rng_reset()
 
     # check that best value of worst case error is less than threshold
-    print 'Worst case error %e with perturbation %e' % (min_max_err, pert_mag)
-    print 'Threshold %e' % (threshold)
+    print('Worst case error %e with perturbation %e' % (min_max_err, pert_mag))
+    print('Threshold %e' % (threshold))
     assert min_max_err < threshold
 
 

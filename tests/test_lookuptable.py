@@ -40,7 +40,7 @@ def pytest_generate_tests(metafunc):
             nout_rng = [3, 33]
             vocab_size = [10, 34]
         fargs = itt.product(nin_rng, nout_rng, vocab_size, bsz_rng)
-        print fargs
+        print(fargs)
         metafunc.parametrize('basic_linargs', fargs)
 
 

@@ -413,7 +413,7 @@ class Model(NervanaObject):
                 if count >= niterations + nskip:
                     break
 
-        # print results
+        # print(results)
         header = ['Func', 'Mean', 'Median', 'Min', 'Max', 'Units']
 
         fmt_titles = '| {:^11} '*len(header) + '|'

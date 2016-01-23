@@ -39,7 +39,7 @@ def convert_file(iopair, keylist):
     '''
     ifname, ofname = iopair
     with open(ifname, 'r') as ifp:
-        print "Converting ", ifname
+        print("Converting ", ifname)
         tdata = cPickle.load(ifp)
         jpegs = tdata['data']
         labels = tdata['labels']

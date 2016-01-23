@@ -255,6 +255,6 @@ if __name__ == '__main__':
 
     for epoch in range(3):
         for x, t in master:
-            print '****', epoch, master.start, master.idx, master.ndata
-            print t.get().argmax(axis=0)[:17]
+            print('****', epoch, master.start, master.idx, master.ndata)
+            print(t.get().argmax(axis=0)[:17])
     master.stop()

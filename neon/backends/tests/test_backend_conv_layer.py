@@ -218,7 +218,7 @@ def test_conv_layer(fargs_tests):
             ("bprop", ngB, ncB.reshape(dimI), cpuB[:-1, :].reshape(dimI), W),
             ("update", ngU, ncU.reshape(dimF), cpuU.reshape(dimF), S)):
 
-        print op
+        print(op)
         assert np.allclose(ngA.get(), cpuA, rtol=0, atol=1e-4)
         assert np.allclose(ncA.get(), cpuA, rtol=0, atol=1e-4)
 

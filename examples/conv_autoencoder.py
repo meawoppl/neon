@@ -63,7 +63,7 @@ callbacks = Callbacks(mlp, train, **args.callback_args)
 
 mlp.fit(train, optimizer=opt_gdm, num_epochs=args.epochs, cost=cost, callbacks=callbacks)
 
-print mlp.layers.layers[-1]
+print(mlp.layers.layers[-1])
 # Plot the reconstructed digits
 try:
     from matplotlib import pyplot, cm
@@ -79,4 +79,4 @@ try:
     pyplot.matshow(test, cmap=cm.gray)
     pyplot.savefig('Reconstructed.png')
 except ImportError:
-    print 'matplotlib needs to be manually installed to generate plots'
+    print('matplotlib needs to be manually installed to generate plots')

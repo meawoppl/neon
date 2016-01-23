@@ -33,7 +33,7 @@ def test_dataset(backend_default, data):
 
     for i in range(2):
         for X_batch, y_batch in train_set:
-            print X_batch.shape, y_batch.shape
+            print(X_batch.shape, y_batch.shape)
         train_set.index = 0
 
 

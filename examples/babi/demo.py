@@ -32,6 +32,12 @@ from neon.data import BABI, QA
 from neon.data.text import Text
 from neon.util.argparser import NeonArgparser, extract_valid_args
 
+# PY3 Compat.
+import sys
+if sys.version > (3, 0):
+    xrange = range
+    raw_input = input
+
 # parse the command line arguments
 parser = NeonArgparser(__doc__)
 parser.add_argument('-t', '--task', type=int, default='1', choices=xrange(1, 21),
@@ -68,15 +74,15 @@ def vectorize(words, max_len):
                                        max_len))
 
 
-print "\nThe vocabulary set from this task has {} words:".format(babi.vocab_size)
-print stitch_sentence(babi.vocab)
-print "\nExample from test set:"
-print "\nStory"
-print stitch_sentence(ex_story)
-print "Question"
-print stitch_sentence(ex_question)
-print "\nAnswer"
-print ex_answer
+print("\nThe vocabulary set from this task has {} words:".format(babi.vocab_size))
+print(stitch_sentence(babi.vocab))
+print("\nExample from test set:")
+print("\nStory")
+print(stitch_sentence(ex_story))
+print("Question")
+print(stitch_sentence(ex_question))
+print("\nAnswer")
+print(ex_answer)
 
 while True:
     # ask user for story and question
@@ -102,7 +108,7 @@ while True:
     max_probs = probs[max_indices]
     sorted_idx = max_indices[np.argsort(max_probs, axis=0)]
 
-    print "\nAnswer:"
+    print("\nAnswer:")
     for idx in reversed(sorted_idx):
         idx = int(idx)
-        print babi.index_to_word[idx], float(probs[idx])
+        print(babi.index_to_word[idx], float(probs[idx]))

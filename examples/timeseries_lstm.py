@@ -27,7 +27,7 @@ Then look at the PNG plots generated.
 try:
     import matplotlib.pyplot as plt
 except ImportError:
-    print 'matplotlib needs to be installed manually to generate plots needed for this example'
+    print('matplotlib needs to be installed manually to generate plots needed for this example')
     raise ImportError()
 
 import numpy as np
@@ -300,7 +300,7 @@ if __name__ == '__main__':
     terr = err(train_output, train_target)
     verr = err(valid_output, valid_target)
 
-    print 'terr = %g, verr = %g' % (terr, verr)
+    print('terr = %g, verr = %g' % (terr, verr))
 
     plt.figure()
     plt.plot(train_output[:, 0], train_output[:, 1], 'bo', label='prediction')

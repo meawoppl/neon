@@ -37,7 +37,7 @@ def test_step_schedule(backend_default):
         lr = sch.get_learning_rate(learning_rate=lr_init, epoch=epoch)
         # test a repeated call for the same epoch
         lr2 = sch.get_learning_rate(learning_rate=lr_init, epoch=epoch)
-        # print epoch, lr, lr2
+        # print(epoch, lr, lr2)
         assert np.allclose(lr, lr_init * change**(np.floor((epoch+1)/step_config)))
         assert np.allclose(lr2, lr_init * change**(np.floor((epoch+1)/step_config)))
 

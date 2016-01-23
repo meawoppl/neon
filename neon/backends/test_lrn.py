@@ -83,27 +83,27 @@ def lrn_helper(dtype, ones, cpu, alpha, beta, ascale, bpower,
     ng.fprop_lrn(layer_g, devI, devO, devD, alpha, beta, ascale, bpower)  # I, O, denom
     nc.fprop_lrn(layer_c, cccI, cccO, cccD, ascale, bpower)  # CPU has no alpha, beta
 
-    print "== denom =="
-    print "CPU fprop"
-    print cccD.get().reshape(C*D*H*W, N)[0:4, 0:4]
-    print "GPU fprop"
-    print devD.get().reshape(C*D*H*W, N)[0:4, 0:4]
+    print("== denom ==")
+    print("CPU fprop")
+    print(cccD.get().reshape(C*D*H*W, N)[0:4, 0:4])
+    print("GPU fprop")
+    print(devD.get().reshape(C*D*H*W, N)[0:4, 0:4])
 
-    print "== output =="
-    print "CPU fprop"
-    print cccO.get().reshape(C*D*H*W, N)[0:4, 0:4]
-    print "GPU fprop"
-    print devO.get().reshape(C*D*H*W, N)[0:4, 0:4]
+    print("== output ==")
+    print("CPU fprop")
+    print(cccO.get().reshape(C*D*H*W, N)[0:4, 0:4])
+    print("GPU fprop")
+    print(devO.get().reshape(C*D*H*W, N)[0:4, 0:4])
 
     # I, O, E, delta, denom
     ng.bprop_lrn(layer_g, devI, devO, devE, devB, devD, alpha, beta, ascale, bpower)
     nc.bprop_lrn(layer_c, cccI, cccO, cccE, cccB, cccD, ascale, bpower)
 
-    print "== bprop =="
-    print "CPU bprop"
-    print cccB.get().reshape(C*D*H*W, N)[0:4, 0:4]
-    print "GPU bprop"
-    print devB.get().reshape(C*D*H*W, N)[0:4, 0:4]
+    print("== bprop ==")
+    print("CPU bprop")
+    print(cccB.get().reshape(C*D*H*W, N)[0:4, 0:4])
+    print("GPU bprop")
+    print(devB.get().reshape(C*D*H*W, N)[0:4, 0:4])
 
     # import ipdb; ipdb.set_trace()
     # cpuO *= beta

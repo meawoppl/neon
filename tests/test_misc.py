@@ -30,13 +30,13 @@ def test_dropout(backend_default):
     mask = ng.empty((6, 4))
 
     logger.info("FPROP")
-    print d_array2.get()
+    print(d_array2.get())
     # d_array2[:] = ng.dropout(0.5) * d_array2
     ng.make_binary_mask(mask, keepthresh=0.5)
     d_array2[:] = mask * d_array2
-    print d_array2.get()
+    print(d_array2.get())
 
     logger.info("BPROP")
-    print d_error.get()
+    print(d_error.get())
     d_error[:] = (d_array2 != 0) * d_error
-    print d_error.get()
+    print(d_error.get())

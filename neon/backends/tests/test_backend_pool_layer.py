@@ -18,6 +18,11 @@ To test pool layer operations between NervanaGPU, NervanaCPU against numpy.
 import itertools as itt
 import numpy as np
 from operator import mul
+import sys
+
+# PY3k reduce
+if sys.version > (3, 0):
+    from itertools import reduce
 
 from neon.backends.nervanagpu import NervanaGPU
 from neon.backends.nervanacpu import NervanaCPU
@@ -201,7 +206,7 @@ def test_pool_layer(poolargs):
             ("fprop", ngO, ncO, cpuO),
             ("bprop", ngB, ncB.reshape(dimI), cpuB[:-1, :].reshape(dimI))):
 
-        print opA
+        print(opA)
         assert np.allclose(ngA.get(), ncA.get(), rtol=0, atol=1e-4)
         assert np.allclose(ncA.get(), cpuA, rtol=0, atol=1e-5)
 

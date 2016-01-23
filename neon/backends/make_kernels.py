@@ -118,7 +118,7 @@ for kernel_name, kernel_spec in kernels.items():
         continue
 
     if not os.path.exists(sass_file):
-        print "Missing sass file: %s for kernel: %s" % (sass_file, kernel_name)
+        print("Missing sass file: %s for kernel: %s" % (sass_file, kernel_name))
         continue
 
     ptx_age   = os.path.getmtime(ptx_file)
@@ -162,18 +162,18 @@ def run_commands(commands):
         for proc, cmdline in procs:
             code = proc.wait()
             if opts.verbose:
-                print cmdline
+                print(cmdline)
             if code:
-                print proc.stderr.read()
+                print(proc.stderr.read())
             output = proc.stdout.read()
             match = kernel_re.search(output)
             if match:
                 kernels_made.append(match.group(1))
             if output and opts.verbose:
-                print output
+                print(output)
 
     if len(kernels_made) > 0 and not opts.verbose:
-        print "%d kernels compiled." % len(kernels_made)
+        print("%d kernels compiled." % len(kernels_made))
 
 run_commands(compile_cubins)
 run_commands(build_cubins)

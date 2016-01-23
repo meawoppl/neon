@@ -153,16 +153,16 @@ def check_gru(seq_len, input_size, hidden_size,
         dr_ref_list, dz_ref_list, dc_ref_list) = gru_ref.lossFun(inp_ref,
                                                                  deltas_ref)
 
-    print '====Verifying hidden states===='
-    print allclose_with_out(gru.outputs.get(),
+    print('====Verifying hidden states====')
+    print(allclose_with_out(gru.outputs.get(),
                             h_ref_list,
                             rtol=0.0,
-                            atol=1.0e-5)
+                            atol=1.0e-5))
 
-    print 'fprop is verified'
+    print('fprop is verified')
 
     # now test the bprop
-    print 'Making sure neon GRU match numpy GRU in bprop'
+    print('Making sure neon GRU match numpy GRU in bprop')
     gru.bprop(gru.be.array(deltas))
     # grab the delta W from gradient buffer
     dWinput_neon = gru.dW_input.get()
@@ -194,77 +194,77 @@ def check_gru(seq_len, input_size, hidden_size,
     dbc_ref = dWGRU_ref[gru_ref.dW_ind_bc]
 
     # print '====Verifying hidden deltas ===='
-    print '====Verifying r deltas ===='
+    print('====Verifying r deltas ====')
     assert allclose_with_out(dr_neon,
                              dr_ref_list,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print '====Verifying z deltas ===='
+    print('====Verifying z deltas ====')
     assert allclose_with_out(dz_neon,
                              dz_ref_list,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print '====Verifying hcan deltas ===='
+    print('====Verifying hcan deltas ====')
     assert allclose_with_out(dc_neon,
                              dc_ref_list,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print '====Verifying update on W_input===='
-    print 'dWxr'
+    print('====Verifying update on W_input====')
+    print('dWxr')
     assert allclose_with_out(dWxr_neon,
                              dWxr_ref,
                              rtol=0.0,
                              atol=1.0e-5)
-    print 'dWxz'
+    print('dWxz')
     assert allclose_with_out(dWxz_neon,
                              dWxz_ref,
                              rtol=0.0,
                              atol=1.0e-5)
-    print 'dWxc'
+    print('dWxc')
     assert allclose_with_out(dWxc_neon,
                              dWxc_ref,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print '====Verifying update on W_recur===='
+    print('====Verifying update on W_recur====')
 
-    print 'dWrr'
+    print('dWrr')
     assert allclose_with_out(dWrr_neon,
                              dWrr_ref,
                              rtol=0.0,
                              atol=1.0e-5)
-    print 'dWrz'
+    print('dWrz')
     assert allclose_with_out(dWrz_neon,
                              dWrz_ref,
                              rtol=0.0,
                              atol=1.0e-5)
-    print 'dWrc'
+    print('dWrc')
     assert allclose_with_out(dWrc_neon,
                              dWrc_ref,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print '====Verifying update on bias===='
-    print 'dbr'
+    print('====Verifying update on bias====')
+    print('dbr')
     assert allclose_with_out(dbr_neon,
                              dbr_ref,
                              rtol=0.0,
                              atol=1.0e-5)
-    print 'dbz'
+    print('dbz')
     assert allclose_with_out(dbz_neon,
                              dbz_ref,
                              rtol=0.0,
                              atol=1.0e-5)
-    print 'dbc'
+    print('dbc')
     assert allclose_with_out(dbc_neon,
                              dbc_ref,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print 'bprop is verified'
+    print('bprop is verified')
 
     return
 
@@ -299,7 +299,7 @@ def gradient_check(seq_len, input_size, hidden_size, batch_size,
     # This is necessary for 32 bit computations
 
     min_max_err = -1.0  # minimum max error
-    print 'Perturb mag, max grad diff'
+    print('Perturb mag, max grad diff')
     for pert_exp in range(-5, 0):
         # need to generate the scaling and input outside
         # having an issue with the random number generator
@@ -320,7 +320,7 @@ def gradient_check(seq_len, input_size, hidden_size, batch_size,
                                            rand_scale=rand_scale,
                                            inp_bl=inp)
         dd = np.max(np.abs(grad_est-deltas))
-        print '%e, %e' % (pert_mag, dd)
+        print('%e, %e' % (pert_mag, dd))
         if min_max_err < 0.0 or dd < min_max_err:
             min_max_err = dd
         # reset the seed so models are same in each run
@@ -328,8 +328,8 @@ def gradient_check(seq_len, input_size, hidden_size, batch_size,
         NervanaObject.be.rng_reset()
 
     # check that best value of worst case error is less than threshold
-    print 'Worst case error %e with perturbation %e' % (min_max_err, pert_mag)
-    print 'Threshold %e' % (threshold)
+    print('Worst case error %e with perturbation %e' % (min_max_err, pert_mag))
+    print('Threshold %e' % (threshold))
     assert min_max_err < threshold
 
 

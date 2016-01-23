@@ -19,6 +19,9 @@ from neon import NervanaObject
 from neon.data.datasets import load_babi
 from neon.data.text import Text
 
+import sys
+if sys.version > (3, 0):
+    from functools import reduce
 
 class QA(NervanaObject):
     """
@@ -88,8 +91,8 @@ class BABI(NervanaObject):
                           {en, en-10k, shuffled, hn, hn-10k, shuffled-10k}
         """
 
-        print 'Preparing bAbI dataset or extracting from %s' % path
-        print 'Task is %s/%s' % (subset, task)
+        print('Preparing bAbI dataset or extracting from %s' % path)
+        print('Task is %s/%s' % (subset, task))
         self.tasks = [
             'qa1_single-supporting-fact',
             'qa2_two-supporting-facts',

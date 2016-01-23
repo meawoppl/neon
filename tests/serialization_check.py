@@ -35,7 +35,7 @@ from neon.util.argparser import NeonArgparser
 
 
 def compare_model_pickles(fn1, fn2):
-    print 'comparing pickle files %s and %s' % (fn1, fn2)
+    print('comparing pickle files %s and %s' % (fn1, fn2))
     with open(fn1, 'r') as fn:
         model1 = pickle.load(fn)
 
@@ -63,11 +63,11 @@ def compare_objs(x, y):
             y = y.reshape(y.size)
             dd = x-y
             worst_case = np.max(np.abs(dd))
-            print 'worst case abs diff = %e' % worst_case
+            print('worst case abs diff = %e' % worst_case)
             ind = np.where((x != 0) | (y != 0))
             rel_err = np.abs(np.divide(dd[ind], np.abs(x[ind]) + np.abs(y[ind])))
             worst_case = np.max(rel_err)
-            print 'worst case rel diff = %e' % worst_case
+            print('worst case rel diff = %e' % worst_case)
             assert False
     else:
         assert x == y
@@ -163,7 +163,7 @@ def main():
         compare_model_pickles('test_oneshot_%d.pkl' % (num_epochs-1),
                               'test_manyshot_%d.pkl' % (num_epochs-1))
     except:
-        print 'test failed....'
+        print('test failed....')
         sys.exit(1)
 
 if __name__ == '__main__':

@@ -126,7 +126,7 @@ class GPUTensor(Tensor):
         self.kahan_reset = 0
 
         if gpudata is None:
-            # print "allocate!"
+            # print("allocate!")
             if size:
                 # print(drv.mem_get_info())
                 self.gpudata = allocator(self.nbytes)

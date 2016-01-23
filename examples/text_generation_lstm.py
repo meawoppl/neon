@@ -127,4 +127,4 @@ for i in range(num_predict):
     x[int(pred), 0] = 1
     y = model_new.fprop(x)
 
-print ''.join(seed_tokens + text)
+print(''.join(seed_tokens + text))

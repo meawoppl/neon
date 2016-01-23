@@ -148,5 +148,4 @@ if __name__ == '__main__':
         [X_test[:1000], X_test[:1000]], y_test[:1000], nclass=10)
     for i in range(3):
         for bidx, (X_batch, y_batch) in enumerate(train_set):
-            print bidx, train_set.start
-            pass
+            print(bidx, train_set.start)

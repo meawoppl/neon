@@ -55,10 +55,10 @@ path = load_text('imdb', path=args.data_dir)
 (X_train, y_train), (X_test, y_test), nclass = Text.pad_data(
     path, vocab_size=vocab_size, sentence_length=sentence_length)
 
-print "Vocab size - ", vocab_size
-print "Sentence Length - ", sentence_length
-print "# of train sentences", X_train.shape[0]
-print "# of test sentence", X_test.shape[0]
+print("Vocab size - ", vocab_size)
+print("Sentence Length - ", sentence_length)
+print("# of train sentences", X_train.shape[0])
+print("# of test sentence", X_test.shape[0])
 
 train_set = DataIterator(X_train, y_train, nclass=2)
 valid_set = DataIterator(X_test, y_test, nclass=2)
@@ -87,5 +87,5 @@ callbacks = Callbacks(model, train_set, eval_set=valid_set, **args.callback_args
 model.fit(train_set, optimizer=optimizer, num_epochs=args.epochs, cost=cost, callbacks=callbacks)
 
 # eval model
-print "Test  Accuracy - ", 100 * model.eval(valid_set, metric=Accuracy())
-print "Train Accuracy - ", 100 * model.eval(train_set, metric=Accuracy())
+print("Test  Accuracy - ", 100 * model.eval(valid_set, metric=Accuracy()))
+print("Train Accuracy - ", 100 * model.eval(train_set, metric=Accuracy()))

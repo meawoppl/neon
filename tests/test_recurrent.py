@@ -150,33 +150,33 @@ def check_rnn(seq_len, input_size, hidden_size,
     db_neon = rnn.db.get()
 
     # comparing outputs
-    print '====Verifying hidden states===='
-    print allclose_with_out(rnn.outputs.get(),
+    print('====Verifying hidden states====')
+    print(allclose_with_out(rnn.outputs.get(),
                             h_ref_list,
                             rtol=0.0,
-                            atol=1.0e-5)
-    print 'fprop is verified'
+                            atol=1.0e-5))
+    print('fprop is verified')
 
-    print '====Verifying update on W and b ===='
-    print 'dWxh'
+    print('====Verifying update on W and b ====')
+    print('dWxh')
     assert allclose_with_out(dWxh_neon,
                              dWxh_ref,
                              rtol=0.0,
                              atol=1.0e-5)
-    print 'dWhh'
+    print('dWhh')
     assert allclose_with_out(dWhh_neon,
                              dWhh_ref,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print '====Verifying update on bias===='
-    print 'db'
+    print('====Verifying update on bias====')
+    print('db')
     assert allclose_with_out(db_neon,
                              db_ref,
                              rtol=0.0,
                              atol=1.0e-5)
 
-    print 'bprop is verified'
+    print('bprop is verified')
 
     return
 
@@ -211,7 +211,7 @@ def gradient_check(seq_len, input_size, hidden_size, batch_size,
     # This is necessary for 32 bit computations
 
     min_max_err = -1.0  # minimum max error
-    print 'Perturb mag, max grad diff'
+    print('Perturb mag, max grad diff')
     for pert_exp in range(-5, 0):
         # need to generate the scaling and input outside
         # having an issue with the random number generator
@@ -232,7 +232,7 @@ def gradient_check(seq_len, input_size, hidden_size, batch_size,
                                            rand_scale=rand_scale,
                                            inp_bl=inp)
         dd = np.max(np.abs(grad_est-deltas))
-        print '%e, %e' % (pert_mag, dd)
+        print('%e, %e' % (pert_mag, dd))
         if min_max_err < 0.0 or dd < min_max_err:
             min_max_err = dd
         # reset the seed so models are same in each run
@@ -240,8 +240,8 @@ def gradient_check(seq_len, input_size, hidden_size, batch_size,
         NervanaObject.be.rng_reset()
 
     # check that best value of worst case error is less than threshold
-    print 'Worst case error %e with perturbation %e' % (min_max_err, pert_mag)
-    print 'Threshold %e' % (threshold)
+    print('Worst case error %e with perturbation %e' % (min_max_err, pert_mag))
+    print('Threshold %e' % (threshold))
     assert min_max_err < threshold
 
 

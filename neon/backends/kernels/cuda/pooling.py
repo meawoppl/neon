@@ -839,7 +839,7 @@ __global__ void spool_bprop_max(
     module = SourceModule(code)
     kernel = module.get_function("spool_bprop_max")
     # f = open("spool_bprop_max.cu", "w")
-    # print >>f, code
+    # f.write(code)
     # f.close()
     kernel.prepare("3P 2f 34I" + ("Pf" if (clss[0] == "x") else ""))
     return kernel

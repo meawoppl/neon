@@ -116,7 +116,7 @@ def load_data(data_dir="."):
             test = ImageLoader(repo_dir=data_dir, inner_size=224, set_name='validation',
                                do_transforms=False)
         except (OSError, IOError, ValueError) as err:
-            print err
+            print(err)
             sys.exit(0)
     else:
         if 'dataset' not in root_yaml:

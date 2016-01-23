@@ -48,7 +48,7 @@ def sweep_epsilon(layer, inp, pert_rng, out_shape=None, lshape=None,
 
     min_max_diff = -1.0
     min_max_pert = None
-    print 'epsilon, max diff'
+    print('epsilon, max diff')
     for epsilon in pert_rng:
         (max_abs, max_rel) = general_gradient_comp(layer,
                                                    inp,
@@ -60,8 +60,8 @@ def sweep_epsilon(layer, inp, pert_rng, out_shape=None, lshape=None,
         if min_max_diff < 0 or max_abs < min_max_diff:
             min_max_diff = max_abs
             min_max_pert = epsilon
-        print '%e %e %e' % (epsilon, max_abs, max_rel)
-    print 'Min max diff : %e at Pert. Mag. %e' % (min_max_diff, min_max_pert)
+        print('%e %e %e' % (epsilon, max_abs, max_rel))
+    print('Min max diff : %e at Pert. Mag. %e' % (min_max_diff, min_max_pert))
     return (min_max_pert, min_max_diff)
 
 
@@ -144,10 +144,10 @@ def general_gradient_comp(layer,
             max_rel_err = rel_err
             max_rel_vals = [grad_est, bprop_val]
 
-    print 'Worst case diff %e, vals grad: %e, bprop: %e' % (max_abs_err,
+    print('Worst case diff %e, vals grad: %e, bprop: %e' % (max_abs_err,
                                                             max_abs_vals[0],
-                                                            max_abs_vals[1])
-    print 'Worst case diff %e, vals grad: %e, bprop: %e' % (max_rel_err,
+                                                            max_abs_vals[1]))
+    print('Worst case diff %e, vals grad: %e, bprop: %e' % (max_rel_err,
                                                             max_rel_vals[0],
-                                                            max_rel_vals[1])
+                                                            max_rel_vals[1]))
     return (max_abs_err, max_rel_err)

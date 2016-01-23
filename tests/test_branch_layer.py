@@ -122,7 +122,7 @@ def test_branch_model():
     err_ref = ref_layers[0].bprop(joined_err).get()
 
     difference = np.max(np.abs(err_ref - errp))
-    print difference
+    print(difference)
     assert(difference < 1e-9)
 
 
